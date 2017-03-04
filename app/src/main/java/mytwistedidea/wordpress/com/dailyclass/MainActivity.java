@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity
         v[5].setOnClickListener(this);
         v[6].setOnClickListener(this);
         v[7].setOnClickListener(this);
+        v[8].setOnClickListener(this);
     }
 
     private void initialize() {
@@ -71,8 +72,9 @@ public class MainActivity extends AppCompatActivity
         v[5] = (View) findViewById(R.id.view_friday);
         v[6] = (View) findViewById(R.id.view_saturday);
         v[7] = (View) findViewById(R.id.view_sunday);
+        v[8] = (View) findViewById(R.id.view_assignment);
 
-        for(int i = 1;i<=7;i++){
+        for(int i = 1;i<=8;i++){
             tv[i] = (TextView) v[i].findViewById(R.id.tv_day);
         }
 
@@ -83,6 +85,7 @@ public class MainActivity extends AppCompatActivity
         tv[5].setText("Friday");
         tv[6].setText("Saturday");
         tv[7].setText("Sunday");
+        tv[8].setText("Assignment");
 
     }
 
@@ -124,8 +127,10 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_AddAssignment) {
             // Handle the camera action
+            Intent intent = new Intent(MainActivity.this, AddAssignments.class);
+            startActivity(intent);
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
@@ -146,6 +151,12 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onClick(View v) {
         int id = v.getId();
+        if(id == R.id.view_assignment){
+            //TODO Assignment class
+            Intent intent = new Intent(MainActivity.this, AssignmentViewing.class);
+            startActivity(intent);
+            return;
+        }
         Intent intent = new Intent(MainActivity.this,Periods.class);
         switch (id){
             case R.id.view_monday:
@@ -174,7 +185,6 @@ public class MainActivity extends AppCompatActivity
                 intent.putExtra("table","sunday");
                 break;
         }
-
         startActivity(intent);
     }
 }

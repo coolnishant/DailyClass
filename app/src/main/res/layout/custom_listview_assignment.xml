@@ -4,24 +4,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/its_background_border"
     android:padding="5dp">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:weightSum="3">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="peroid"
-        android:layout_weight="1"
-        android:gravity="center_horizontal"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:textSize="20sp"
-        android:textColor="@color/colorOne"
-        android:id="@+id/tv_period"/>
 
-</LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,18 +16,29 @@
         android:text="Subject"
         android:layout_weight="1"
         android:gravity="center_horizontal"
-        android:textSize="30sp"
+        android:textSize="20sp"
         android:textColor="@color/colorTwo"
-        android:id="@+id/tv_subject"/>
+        android:id="@+id/tv_subjectV"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="teacher"
+        android:text="Deadline"
         android:layout_weight="1"
         android:gravity="center_horizontal"
-        android:textSize="30sp"
+        android:textSize="20sp"
         android:textColor="@color/colorTwo"
-        android:id="@+id/tv_teacher"/>
+        android:id="@+id/tv_deadlineV"/>
     </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Assignment"
+            android:gravity="center_horizontal"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:textSize="20sp"
+            android:textColor="@color/colorOne"
+            android:id="@+id/tv_assignmentDetailsV"/>
+
 </LinearLayout>

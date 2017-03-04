@@ -21,6 +21,12 @@
         <activity
             android:name=".Periods"
             android:label="@string/title_activity_periods"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".AddPeriods" />
+        <activity android:name=".AddAssignments" />
+        <activity
+            android:name=".AssignmentViewing"
+            android:label="@string/title_activity_assignment_viewing"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
