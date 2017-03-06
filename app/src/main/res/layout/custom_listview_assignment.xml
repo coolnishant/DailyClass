@@ -20,15 +20,15 @@
         android:textColor="@color/colorTwo"
         android:id="@+id/tv_subjectV"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Deadline"
-        android:layout_weight="1"
-        android:gravity="center_horizontal"
-        android:textSize="20sp"
-        android:textColor="@color/colorTwo"
-        android:id="@+id/tv_deadlineV"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Deadline"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:textSize="20sp"
+            android:textColor="@color/colorTwo"
+            android:id="@+id/tv_deadlineV"/>
     </LinearLayout>
         <TextView
             android:layout_width="match_parent"

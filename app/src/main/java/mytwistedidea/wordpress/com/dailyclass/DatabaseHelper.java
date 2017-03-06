@@ -29,8 +29,6 @@ public class DatabaseHelper {
         SQLiteDatabase sqLiteDatabase = helper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
-
-
 //        contentValues.put(MyHelper.PERIOD,periodNo);
         contentValues.put(MyHelper.SUBJECT,subject);
         contentValues.put(MyHelper.START_TIME,startTime);
@@ -52,10 +50,12 @@ public class DatabaseHelper {
         else
             id = sqLiteDatabase.insert(MyHelper.TABLE_NAME_SUNDAY,null,contentValues);
 
-        Log.d("id from insAss"," "+id);
+        Log.d("ih"," Here it is inINsert end");
         sqLiteDatabase.close();
         return id;
     }
+
+
 
     public long insertAssignment(String subject,String assignment,String deadline,String weekday){
         SQLiteDatabase sqLiteDatabase = helper.getWritableDatabase();
@@ -75,12 +75,71 @@ public class DatabaseHelper {
         return id;
     }
 
+
+
+    public void deleteAnAssignment(String assigmentno){
+        SQLiteDatabase sqLiteDatabase = helper.getWritableDatabase();
+//        String[] args={assigmentno};
+        sqLiteDatabase.delete(MyHelper.TABLE_NAME_ASSIGNMENT,
+                MyHelper.ASSIGNMENTNO+"= '"+assigmentno+"'",null);
+//        String columns[] = new String[]{
+////                MyHelper.PERIOD,
+//                MyHelper.ASSIGNMENTNO,
+//                MyHelper.SUBJECT,
+////                MyHelper.START_TIME,
+////                MyHelper.END_TIME,
+//                MyHelper.ASSIGNMENT,
+////                MyHelper.TEACHER
+//                MyHelper.DEADLINE_ASSINGMENT,
+//                MyHelper.WEEKDAY
+//        };
+//
+//        Cursor cursor = sqLiteDatabase.query(MyHelper.TABLE_NAME_ASSIGNMENT,columns,null,null,null,null, null);
+//        cursor.requery();
+    }
+
+
+    public void deleteAPeriod(String table, String period){
+        SQLiteDatabase sqLiteDatabase = helper.getWritableDatabase();
+//        String[] args={assigmentno};
+        String TABLE_NAME;
+        if (table.equals("monday"))
+            TABLE_NAME = MyHelper.TABLE_NAME_MONDAY;
+        else if (table.equals("tuesday"))
+            TABLE_NAME = MyHelper.TABLE_NAME_TUESDAY;
+        else if (table.equals("wednesday"))
+            TABLE_NAME = MyHelper.TABLE_NAME_WEDNESDAY;
+        else if (table.equals("thrusday"))
+            TABLE_NAME = MyHelper.TABLE_NAME_THRUSDAY;
+        else if (table.equals("friday"))
+            TABLE_NAME = MyHelper.TABLE_NAME_FRIDAY;
+        else if (table.equals("saturday"))
+            TABLE_NAME = MyHelper.TABLE_NAME_SATURDAY;
+        else
+            TABLE_NAME = MyHelper.TABLE_NAME_SUNDAY;
+        sqLiteDatabase.delete(TABLE_NAME,
+                MyHelper.PERIOD+"= '"+period+"'",null);
+//        String columns[] = new String[]{
+//                MyHelper.PERIOD,
+////                MyHelper.ASSIGNMENTNO,
+//                MyHelper.SUBJECT,
+//                MyHelper.START_TIME,
+//                MyHelper.END_TIME,
+////                MyHelper.ASSIGNMENT,
+//                MyHelper.TEACHER
+////                MyHelper.DEADLINE_ASSINGMENT,
+////                MyHelper.WEEKDAY
+//        };
+//
+//        Cursor cursor = sqLiteDatabase.query(TABLE_NAME,columns,null,null,null,null, null);
+//        cursor.requery();
+    }
+
     public ArrayList<String> getAllPeriod(String table){
 
         SQLiteDatabase sqLiteDatabase = helper.getReadableDatabase();
-        ArrayList<Integer> previousRoll = new ArrayList<Integer>();
         String columns[] = {
-//                MyHelper.PERIOD,
+                MyHelper.PERIOD,
                 MyHelper.SUBJECT,
                 MyHelper.START_TIME,
                 MyHelper.END_TIME,
@@ -111,6 +170,7 @@ public class DatabaseHelper {
 //
 //        Cursor  cursor = sqLiteDatabase.rawQuery(query,null);
 
+        Log.e("s","here print");
         ArrayList<String> arrayList = new ArrayList<String>();
 //
 //        arrayList = null;
@@ -125,6 +185,7 @@ public class DatabaseHelper {
         if(cursor.moveToFirst()){
             do{
                 //        arrayList.add(cursor.getString(cursor.getColumnIndex(MyHelper.PERIOD)).toString());
+                arrayList.add(cursor.getString(cursor.getColumnIndex(MyHelper.PERIOD)));
                 arrayList.add(cursor.getString(cursor.getColumnIndex(MyHelper.SUBJECT)));
                 arrayList.add(cursor.getString(cursor.getColumnIndex(MyHelper.START_TIME)));
                 arrayList.add(cursor.getString(cursor.getColumnIndex(MyHelper.END_TIME)));
@@ -155,6 +216,7 @@ public class DatabaseHelper {
         ArrayList<String> arrayList = new ArrayList<String>();
         String columns[] = {
 //                MyHelper.PERIOD,
+                MyHelper.ASSIGNMENTNO,
                 MyHelper.SUBJECT,
 //                MyHelper.START_TIME,
 //                MyHelper.END_TIME,
@@ -169,6 +231,7 @@ public class DatabaseHelper {
         Cursor cursor = sqLiteDatabase.query(TABLE_NAME,columns,null,null,null,null, null);
         if(cursor.moveToFirst()){
             do{
+                arrayList.add(cursor.getString(cursor.getColumnIndex(MyHelper.ASSIGNMENTNO)));
                 //        arrayList.add(cursor.getString(cursor.getColumnIndex(MyHelper.PERIOD)).toString());
                 arrayList.add(cursor.getString(cursor.getColumnIndex(MyHelper.SUBJECT)));
 //                arrayList.add(cursor.getString(cursor.getColumnIndex(MyHelper.START_TIME)));
@@ -197,6 +260,7 @@ public class DatabaseHelper {
                 MyHelper.ASSIGNMENT,
 //                MyHelper.TEACHER
                 MyHelper.DEADLINE_ASSINGMENT,
+                MyHelper.WEEKDAY
         };
 
         String TABLE_NAME = MyHelper.TABLE_NAME_ASSIGNMENT;
@@ -228,26 +292,31 @@ public class DatabaseHelper {
 
         SQLiteDatabase sqLiteDatabase = helper.getReadableDatabase();
         ArrayList<String> arrayList = new ArrayList<String>();
-        String columns[] = {
+        String columns[] = new String[]{
 //                MyHelper.PERIOD,
+                MyHelper.ASSIGNMENTNO,
                 MyHelper.SUBJECT,
 //                MyHelper.START_TIME,
 //                MyHelper.END_TIME,
                 MyHelper.ASSIGNMENT,
 //                MyHelper.TEACHER
                 MyHelper.DEADLINE_ASSINGMENT,
+                MyHelper.WEEKDAY
         };
 
+//        Log.e("v",weekday);
+//        Log.e("d",MyHelper.WEEKDAY);
         String TABLE_NAME = MyHelper.TABLE_NAME_ASSIGNMENT;
 
 //        String query = "SELECT * FROM "+ TABLE_NAME + " WHERE "+MyHelper.WEEKDAY+"='"+weekday+"'";
 //
 //        Cursor  cursor = sqLiteDatabase.rawQuery(query,null);
-        Cursor cursor = sqLiteDatabase.query(TABLE_NAME,columns,MyHelper.WEEKDAY+" = "+weekday,null,null,null, null);
+        Cursor cursor = sqLiteDatabase.query(TABLE_NAME,columns,MyHelper.WEEKDAY+"= '"+weekday+"'",null,null,null, null);
 
         if(cursor.moveToFirst()){
             do{
                 //        arrayList.add(cursor.getString(cursor.getColumnIndex(MyHelper.PERIOD)).toString());
+                arrayList.add(cursor.getString(cursor.getColumnIndex(MyHelper.ASSIGNMENTNO)));
                 arrayList.add(cursor.getString(cursor.getColumnIndex(MyHelper.SUBJECT)));
 //                arrayList.add(cursor.getString(cursor.getColumnIndex(MyHelper.START_TIME)));
 //                arrayList.add(cursor.getString(cursor.getColumnIndex(MyHelper.END_TIME)));
@@ -292,13 +361,13 @@ public class DatabaseHelper {
         private static final String ASSIGNMENTNO="assignment_no";
         private static final String WEEKDAY="weekday";
 
-        private static final String CREATE_TABLE_MONDAY= "CREATE TABLE "+TABLE_NAME_MONDAY+" ("+
+        private static final String CREATE_TABLE_MONDAY= "CREATE TABLE "+TABLE_NAME_MONDAY+"("+
                 PERIOD+" INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                SUBJECT+" VARCHAR(255) ,"+
-                START_TIME+" VARCHAR(255)  UNIQUE,"+
-                END_TIME+" VARCHAR(255) UNIQUE,"+
+                SUBJECT+" VARCHAR(255) NOT NULL,"+
+                START_TIME+" VARCHAR(255) NOT NULL UNIQUE,"+
+                END_TIME+" VARCHAR(255) NOT NULL UNIQUE,"+
 //                ASSIGNMENT+" VARCHAR(255),"+
-                TEACHER+" VARCHAR(255) );";
+                TEACHER+" VARCHAR(255));";
 //                DEADLINE_ASSINGMENT+" VARCHAR(255));";
 
         private static final String CREATE_TABLE_TUESDAY= "CREATE TABLE "+TABLE_NAME_TUESDAY+"("+

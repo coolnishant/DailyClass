@@ -23,8 +23,8 @@ public class AddPeriods extends AppCompatActivity implements View.OnClickListene
     DatabaseHelper helpers;
     int a = 0;
 
-    static String subject=new String(""), faculty = new String(""), startTime = new String(""), endTime=new String("");
-    static String tableFrom=new String("");
+    String subject=new String(""), faculty = new String(""), startTime = new String(""), endTime=new String("");
+    String tableFrom=new String("");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
